@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79cc2c897fcb2b94bb72cb319e61cc18, type: 3}
+  m_Name: Sword
+  m_EditorClassIdentifier: 
+  itemID: 045ed44f-086f-4913-9d52-0ec0d0624a76
+  displayName: Short Sword
+  description: Used for close range
+  icon: {fileID: 21300000, guid: 3591028c710578d4d90936fdb9a13f09, type: 3}
+  pickup: {fileID: 2146294487541217383, guid: e7c9adae49dfa5a439f28f5ce3d5cc76, type: 3}
+  stackable: 0
+  type: 0
+  wepConfig: {fileID: 11400000, guid: 54358881bd70c9a46b3b45b4850e583f, type: 2}

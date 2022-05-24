@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3132842998592374360
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3132842998592374366}
+  - component: {fileID: 3132842998592374361}
+  m_Layer: 0
+  m_Name: Multiple Arrow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3132842998592374366
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3132842998592374360}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3132842998592374361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3132842998592374360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e7fb25ae3361084a8033d16fbd75158, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagePerecentageModifierByLevel:
+  - 80
+  - 85
+  - 90
+  - 90
+  - 95
+  - 100
+  - 105
+  - 105
+  - 110
+  - 115
+  - 120
+  - 130
+  - 130
+  - 135
+  - 140
+  - 145
+  - 150
+  - 150
+  - 165
+  - 180
+  damageAdditionModifierByLevel:
+  - 5
+  id: 7
+  cooldown: 10
+  amountOfBoltsByLevel: 03000000030000000300000005000000050000000500000005000000070000000700000007000000070000000700000009000000090000000900000009000000090000000b0000000b0000000b000000
+  magicBolt: {fileID: 8053657237606544037, guid: c40a2f5dcb2eb694c9ac4d6b55a7e868, type: 3}
+  distance: 15
+  timeToLive: 1.5
+  positionModifier: {x: 0, y: 1, z: 0}
+  angle: 60

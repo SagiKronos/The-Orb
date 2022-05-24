@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79cc2c897fcb2b94bb72cb319e61cc18, type: 3}
+  m_Name: Short Bow
+  m_EditorClassIdentifier: 
+  itemID: a9574c44-682a-4275-9ec0-1bbc85ac2c55
+  displayName: Short Bow
+  description: Used for not a long distance, doing an okay damage.
+  icon: {fileID: 21300000, guid: f567d871cb20ef040a91f6abadfa1be8, type: 3}
+  pickup: {fileID: 2947843898420848803, guid: b7a5150d9c55bd145b8885dff90bd6d6, type: 3}
+  stackable: 0
+  type: 0
+  wepConfig: {fileID: 11400000, guid: c2bbb1253d2094b45953e47af1488f3e, type: 2}

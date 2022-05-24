@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4b7fb5a8bafb1844bf36cbcee1ae995, type: 3}
+  m_Name: StrongShot
+  m_EditorClassIdentifier: 
+  skill: {fileID: 3132842998592374361, guid: b757d89f1fe1e3f4c999894b6fe20760, type: 3}
+  skillSprite: {fileID: 21300000, guid: f115a4d68a3c6ac41bae2879cf346b27, type: 3}
+  requiredLvl: 0
+  skillOverride: {fileID: 0}
+  SkillRequirements: 
+  displayName: Strong Shot
+  descirptionFormat: Launching a single strong arrow dealing {0} damage
+  timeSinceLastActivated: 0

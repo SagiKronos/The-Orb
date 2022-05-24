@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4b7fb5a8bafb1844bf36cbcee1ae995, type: 3}
+  m_Name: MultipleFireArrows
+  m_EditorClassIdentifier: 
+  skill: {fileID: 3132842998592374361, guid: a24a478f25fd9ea4897da9698762c8db, type: 3}
+  skillSprite: {fileID: 21300000, guid: 9b168e1816680014d9952643129198b5, type: 3}
+  requiredLvl: 0
+  skillOverride: {fileID: 0}
+  SkillRequirements: 0500000004000000
+  displayName: Multiple Arrows
+  descirptionFormat: Launching {1} fire arrows dealing {0} damage each
+  timeSinceLastActivated: 0
