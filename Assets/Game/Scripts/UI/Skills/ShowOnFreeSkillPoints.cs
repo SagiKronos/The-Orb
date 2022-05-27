@@ -13,7 +13,7 @@ namespace TheOrb.UI.Skills
     public class ShowOnFreeSkillPoints : MonoBehaviour
     {
         [SerializeField] GameObject objToShow;
-        [SerializeField] TextMeshProUGUI amountText;
+        [SerializeField] Text amountText;
         private PlayerSkillsManager skillsManager;
 
 
@@ -26,7 +26,9 @@ namespace TheOrb.UI.Skills
         {
             var freePoints = skillsManager.GetFreeSkillPoints();
             objToShow.SetActive(freePoints > 0);
-            amountText.text = freePoints < 10 ? freePoints.ToString() : "+9";
+
+            if (amountText != null)
+                amountText.text = freePoints < 10 ? freePoints.ToString() : "+9";
         }
     }
 }

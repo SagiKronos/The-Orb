@@ -44,10 +44,6 @@ namespace TheOrb.Combat.Skills
 
         private void Update()
         {
-            //Delete
-            if (Input.GetKeyDown(KeyCode.Z))
-                AddSkillPoint(1);
-
             foreach (var skill in lookup)
             {
                 skill.Value.timeSinceLastActivated += Time.deltaTime;
