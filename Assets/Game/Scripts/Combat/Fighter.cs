@@ -124,19 +124,12 @@ namespace TheOrb.Combat
             var damage = baseStats.GetStat(Stat.Damage);
 
             if (currentWeapon != null)
-            {
                 currentWeapon.value.OnHit();
-            }
-
 
             if (currentWeaponConfig.HasProjectile())
-            {
                 currentWeaponConfig.LaunchProjectile(rightHandTransform, leftHandTransform, target, gameObject, damage);
-            }
             else
-            {
                 target.TakeDamage(gameObject, damage);
-            }
         }
 
         public bool CanAttack(GameObject combatTarget)
