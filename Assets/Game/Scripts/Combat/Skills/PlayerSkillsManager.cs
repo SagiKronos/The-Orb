@@ -16,7 +16,6 @@ namespace TheOrb.Combat.Skills
         ActiveSkillConfig currentActiveSkill = null;
         private bool isCanceled;
         private Vector3 launchedPosition;
-        private Animator animator;
         private Dictionary<SkillIds, int> availableSkills = new Dictionary<SkillIds, int>();
         private int freeSkillPoints;
 
@@ -34,12 +33,6 @@ namespace TheOrb.Combat.Skills
         public static PlayerSkillsManager GetPlayersSkillsManager()
         {
             return GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerSkillsManager>();
-        }
-
-
-        private void Start()
-        {
-            animator = GetComponentInChildren<Animator>();
         }
 
         private void Update()
