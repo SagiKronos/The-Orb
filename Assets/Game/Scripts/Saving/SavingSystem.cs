@@ -12,21 +12,22 @@ namespace TheOrb.Saving
 {
     public class SavingSystem : MonoBehaviour
     {
+        public static SavingSystem Instance;
+
         const string defaultSaveFile = "save";
         [SerializeField] float fadeInTime = 0.5f;
         [SerializeField] Fader fader;
-        private static bool wasSpawned;
         
 
         private void Awake()
         {
-            if (wasSpawned)
+            if (Instance != null)
             {
                 Destroy(gameObject);
                 return;
             }
 
-            wasSpawned = true;
+            Instance = this;
             fader = FindObjectOfType<Fader>();
             DontDestroyOnLoad(gameObject);
         }
@@ -40,15 +41,6 @@ namespace TheOrb.Saving
         // Update is called once per frame
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.L))
-            {
-                Load();
-            }
-
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                Save();
-            }
         }
 
 
@@ -65,12 +57,7 @@ namespace TheOrb.Saving
             RestoreState(state);
         }
 
-        public void NewGame()
-        {
-            SceneManager.LoadScene(1);
-        }
-
-        private void Save()
+        public void Save()
         {
             Dictionary<string, object> state = LoadFile(defaultSaveFile);
             CaptureState(state);

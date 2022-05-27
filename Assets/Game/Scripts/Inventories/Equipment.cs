@@ -51,10 +51,16 @@ namespace TheOrb.Inventories
 
         public void RestoreState(object state)
         {
-            if (state == null) return;
-
-            var item = Resources.LoadAll<InventoryItem>("").First(x => x.GetItemID() == state.ToString());
-            EquipItem(item);
+            if (state == null || state.ToString() == "null")
+            {
+                RemoveItem(ItemType.Weapon);
+            }
+            else
+            {
+                var item = Resources.LoadAll<InventoryItem>("").First(x => x.GetItemID() == state.ToString());
+                EquipItem(item);
+            }
+            
         }
     }
 }

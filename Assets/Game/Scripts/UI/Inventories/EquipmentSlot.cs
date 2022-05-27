@@ -53,6 +53,7 @@ namespace TheOrb.UI.Inventories
         {
             equipment.RemoveItem(equipmentType);
             icon.SetItem(null, 0);
+            itemId = null;
         }
 
         public object CaptureState()
