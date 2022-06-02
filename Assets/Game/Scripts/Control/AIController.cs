@@ -21,13 +21,14 @@ namespace TheOrb.Control
         [Range(0, 1)]
         [SerializeField] float patrolSpeedFraction = 0.2f;
 
+
         private Fighter fighter;
         private GameObject player;
         private Health health;
         private Mover mover;
         private ActionScheduler actionScheduler;
-
-        LazyValue<Vector3> guardPosition;
+        private AIStates currentState;
+        LazyValue<Vector3> position;
         float timeSinceLastSawPlayer = Mathf.Infinity;
         float timeAtWayPoint = Mathf.Infinity;
         float timeSinceAggrevated = Mathf.Infinity;
@@ -40,35 +41,56 @@ namespace TheOrb.Control
             mover = GetComponent<Mover>();
             actionScheduler = GetComponent<ActionScheduler>();
             player = GameObject.FindWithTag("Player");
-            guardPosition = new LazyValue<Vector3>(GetInitGuardPosition);
+            position = new LazyValue<Vector3>(GetInitPosition);
         }
 
         private void Start()
         {
-            guardPosition.ForceInit();
+            position.ForceInit();
         }
 
         private void Update()
         {
             if (health.IsDead) return;
-
-            if (IsAggrevated() && fighter.CanAttack(player))
+            
+            switch (currentState)
             {
-                AttackBehavior();
-            }
-            else if (suspicionTime > timeSinceLastSawPlayer)
-            {
-                SuspicionBehavior();
-            }
-            else
-            {
-                PatrolBehavior();
+                case AIStates.Idle:
+                    IdleBehaviour();
+                    break;
+                case AIStates.Patroling:
+                    PatrolBehavior();
+                    break;
+                case AIStates.PatrolingWait:
+                    PartrolingWaitBehaviour();
+                    break;
+                case AIStates.Suspect:
+                    SuspicionBehavior();
+                    break;
+                case AIStates.Attacking:
+                    AttackBehavior();
+                    break;
+                default:
+                    break;
             }
 
             UpdateTimers();
         }
 
-        private Vector3 GetInitGuardPosition()
+        private void IdleBehaviour()
+        {
+            if (IsAggrevated() && fighter.CanAttack(player))
+            {
+                currentState = AIStates.Attacking;
+                return;
+            }
+
+            if (path != null)
+                currentState = AIStates.Patroling;
+
+        }
+
+        private Vector3 GetInitPosition()
         {
             return transform.position;
         }
@@ -82,21 +104,28 @@ namespace TheOrb.Control
 
         private void PatrolBehavior()
         {
-            Vector3 nextPosition = gameObject.transform.position;
-
-            if (path != null)
+            if (IsAggrevated() && fighter.CanAttack(player))
             {
-                if (AtWaypoint())
-                {
-                    timeAtWayPoint = 0;
-                    CycleWaypoint();
-                }
-                nextPosition = GetCurrentWaypoint();
+                currentState = AIStates.Attacking;
+                return;
             }
 
-            if (timeAtWayPoint >= dwellingTimeInWaypoint)
+            if (AtWaypoint())
             {
-                mover.StartMoveAction(nextPosition, patrolSpeedFraction);
+                timeAtWayPoint = 0;
+                mover.Cancel();
+                currentState = AIStates.PatrolingWait;
+            }
+            else
+                mover.StartMoveAction(GetCurrentWaypoint(), patrolSpeedFraction);
+        }
+
+        private void PartrolingWaitBehaviour()
+        {
+            if (timeAtWayPoint > dwellingTimeInWaypoint)
+            {
+                CycleWaypoint();
+                currentState = AIStates.Patroling;
             }
         }
 
@@ -118,18 +147,26 @@ namespace TheOrb.Control
         private void SuspicionBehavior()
         {
             actionScheduler.CancelCurrentAction();
+            currentState = AIStates.Idle;
         }
 
         private void AttackBehavior()
         {
-            timeSinceLastSawPlayer = 0f;
-            fighter.Attack(player);
-            AggrevateNearbyEnemies();
+            if (IsAggrevated() && fighter.CanAttack(player))
+            {
+                timeSinceLastSawPlayer = 0f;
+                fighter.Attack(player);
+                AggrevateNearbyEnemies();
+            }
+            else if (suspicionTime > timeSinceLastSawPlayer)
+            {
+                currentState = AIStates.Suspect;
+            }
         }
 
         private void AggrevateNearbyEnemies()
         {
-            var hits = Physics.SphereCastAll(transform.position, shoutDistance, Vector3.up, 0).Select(x => x.collider.GetComponent<AIController>()).Where(x => x != null);
+            var hits = Physics.SphereCastAll(transform.position, shoutDistance, Vector3.up, 0).Select(x => x.collider.GetComponent<AIController>()).Where(x => x != null && x != this   );
             foreach (var hit in hits)
             {
                 hit.Aggrevate();
@@ -139,6 +176,7 @@ namespace TheOrb.Control
         public void Aggrevate()
         {
             timeSinceAggrevated = 0f;
+            currentState = AIStates.Attacking;
         }
 
         private bool IsAggrevated()
