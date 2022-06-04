@@ -33,6 +33,8 @@ namespace TheOrb.Inventories
 
         public InventoryItem GetItem(ItemType type)
         {
+            if (equipment == null)
+                return null;
             return equipment[type];
         }
 
